@@ -1,5 +1,6 @@
-import React, { ReactChild } from "react";
+import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { colors } from "../constants/colors";
 
 export interface IButton {
   children: string;
@@ -13,11 +14,24 @@ const Button = ({ children, type, onPress }: IButton) => {
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [styles.pressed, styles.buttonInnerContainer]
-            : styles.buttonInnerContainer
+            ? [
+                styles.pressed,
+                styles.buttonInnerContainer,
+                type === "primary"
+                  ? styles.primaryButton
+                  : styles.secondaryButton,
+              ]
+            : [
+                styles.buttonInnerContainer,
+                type === "primary"
+                  ? styles.primaryButton
+                  : styles.secondaryButton,
+              ]
         }
         onPress={onPress}
-        android_ripple={{ color: "#640233" }}
+        android_ripple={{
+          color: type === "primary" ? colors.primary600 : colors.secondary600,
+        }}
       >
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
@@ -34,7 +48,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   buttonInnerContainer: {
-    backgroundColor: "#72063c",
     paddingVertical: 8,
     paddingHorizontal: 16,
     elevation: 2,
@@ -46,6 +59,10 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.75,
   },
-  primaryButton: {},
-  secondaryButton: {},
+  primaryButton: {
+    backgroundColor: colors.primary500,
+  },
+  secondaryButton: {
+    backgroundColor: "blue",
+  },
 });

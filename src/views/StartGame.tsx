@@ -2,8 +2,13 @@ import { useState } from "react";
 import { Alert, StyleSheet, TextInput, View } from "react-native";
 import { inputValidator } from "../utils/inputValidator";
 import Button from "../components/Button";
+import { colors } from "../constants/colors";
 
-const StartGame = () => {
+interface IStartGame {
+  onConfirmed: (selectedNumber: string) => void;
+}
+
+const StartGame = ({ onConfirmed }: IStartGame) => {
   const [enteredNumber, setEnteredNumber] = useState("");
 
   function numberHandler(enteredNumber: string) {
@@ -17,7 +22,7 @@ const StartGame = () => {
   function confirmInputHandler() {
     const validatedInput = inputValidator(enteredNumber);
 
-    if (!validatedInput) { 
+    if (!validatedInput) {
       Alert.alert(
         "Invalid number!",
         "Please enter a number between 0 and 99.",
@@ -26,7 +31,7 @@ const StartGame = () => {
       return;
     }
 
-    console.log("Valid number!");
+    onConfirmed(enteredNumber);
   }
 
   return (
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginHorizontal: 24,
     padding: "5%",
-    backgroundColor: "#4e0329",
+    backgroundColor: colors.primary800,
     borderRadius: 8,
     elevation: 6,
     shadowColor: "black",
@@ -78,9 +83,9 @@ const styles = StyleSheet.create({
     width: 40,
     textAlign: "center",
     fontSize: 32,
-    borderColor: "#ddb52f",
+    borderColor: colors.accent500,
     borderBottomWidth: 2,
-    color: "#ddb52f",
+    color: colors.accent500,
     marginVertical: 8,
     fontWeight: "bold",
   },
