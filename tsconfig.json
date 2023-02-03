@@ -3,15 +3,10 @@
   "compilerOptions": {
     "jsx": "react-native",
     "noEmit": true,
+    "moduleResolution": "node",
     "strict": true,
-    "baseUrl": ".",
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@navigation/*": ["src/navigation/*"],
-      "@views/*": ["src/views/*"],
-      "@services/*": ["src/services/*"],
-      "@utils/*": ["src/utils/*"]
+      "src/*": ["./*"]
     }
   },
   "include": ["src", "App.tsx", "**/*.ts", "**/*.tsx"],

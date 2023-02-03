@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, StyleSheet, TextInput, View } from "react-native";
 import { inputValidator } from "../utils/inputValidator";
-import Button from "../components/Button";
+import Button from "../components/atoms/Button";
 import { colors } from "../constants/colors";
 
 interface IStartGame {

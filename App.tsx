@@ -5,19 +5,32 @@ import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { StartGame } from "./src/views/StartGame";
 import { GameScreen } from "./src/views/GameScreen";
+import { GameOver } from "./src/views/GameOver";
 import { colors } from "./src/constants/colors";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState<number | null>(null);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
   function selectedNumberHandler(selectedNumber: string) {
     setUserNumber(parseInt(selectedNumber));
+    setIsGameOver(false);
   }
 
   let screen = <StartGame onConfirmed={selectedNumberHandler} />;
 
+  function gameOverHandler() {
+    setIsGameOver(true);
+  }
+
   if (!!userNumber) {
-    screen = <GameScreen />;
+    screen = (
+      <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+    );
+  }
+
+  if (isGameOver) {
+    screen = <GameOver />;
   }
 
   return (
